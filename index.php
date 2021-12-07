@@ -41,12 +41,12 @@
                     line += "<td>" + (k+1) + "</td>";
                     line += "<td>" + item.fname + "</td>";
                     line += "<td>" + item.lname + "</td>";
-                    line = "</tr>";
+                    line += "</tr>";
                 $("#tblstudent").append(line);
             })
         })
         .fail((xhr, status, err)=>{
-
+            console.log("error");
         });
     }
 
