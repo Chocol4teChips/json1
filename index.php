@@ -1,63 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-
 <body>
-
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody id="tblPost">
+            
+        </tbody>
+    </table>
 </body>
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>fname</th>
-            <th>lname</th>
-        </tr>
-    </thead>
-    <tbody id="tblstudent">
 
-    </tbody>
-</table>
 <script>
+    function LoadPosts() {
+        var url="https://jsonplaceholder.typicode.com/posts"
 
-    function loadJSON() {
-        
-        var url ="http://cj-android-demon.herokuapp.com/json2.php"
-        
-        $.getJSON(url).done((data)=>{
-            console.log(data);
-            $.each(data, (k,item) =>{
-                console.log(k);
-                console.log(item);
-                var line = "<tr>";
-                    line += "<td>" + (k+1) + "</td>";
-                    line += "<td>" + item.fname + "</td>";
-                    line += "<td>" + item.lname + "</td>";
-                    line += "</tr>";
-                $("#tblstudent").append(line);
+        $.getJSON(url)
+            .done((data) =>{
+                $.each(data,(k,item) => {
+                    console.log(item);
+                    var line = "<tr>";
+                        line += "<td>" + item.id + "</td>"
+                        line += "<td>" + item.title + "</td>"
+                        line += "<td>" + item.userId + "</td>"
+                        line += "</tr>";
+                    $("#tblPost").append(line);
+                })      
             })
-        })
-        .fail((xhr, status, err)=>{
-            console.log("error");
-        });
+            .fail((xhr,err,status) =>{
+
+            })
     }
 
-
-
-
-
     $(() => {
-        loadJSON();
-    });
-
+        LoadPosts();
+    })
 </script>
-
 </html>
