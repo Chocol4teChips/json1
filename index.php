@@ -9,7 +9,11 @@
     <title>Document</title>
 </head>
 <body>
-    <button id="btnjs1" > JSON 1</button>
+
+    <button id="btnjs1">JSON 1</button><br/>
+    fname : <span id="fname"></span><br/>
+    lname : <span id="lname"></span>
+
 </body>
 
 <script>
@@ -19,7 +23,10 @@
         $.get(url,(data,status) => {
             console.log(data);
             var jsonData = JSON.parse(data);
-            console.log(jsonData);
+            console.log(jsonData.fname);
+            console.log(jsonData.lname);
+            $("#fname").text(jsonData.fname);
+            $("#lname").text(jsonData.fname);
         });
 
     }
