@@ -1,37 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
-<body>
 
-    <button id="btnjs1">JSON 1</button><br/>
-    fname : <span id="fname"></span><br/>
-    lname : <span id="lname"></span>
+<body>
 
 </body>
 
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>fname</th>
+            <th>lname</th>
+        </tr>
+    </thead>
+    <tbody id="tblstudent">
+
+    </tbody>
+</table>
 <script>
 
-    function loadJS(){
-        var url = "https://cj-android-demon.herokuapp.com/json1.php"
-        $.get(url,(data,status) => {
+    function loadJSON() {
+        
+        var url ="http://cj-android-demon.herokuapp.com/json2.php"
+        
+        $.getJSON(url).done((data)=>{
             console.log(data);
-            var jsonData = JSON.parse(data);
-            console.log(jsonData.fname);
-            console.log(jsonData.lname);
-            $("#fname").text(jsonData.fname);
-            $("#lname").text(jsonData.fname);
-        });
+            $.each(data, (k,item) =>{
+                console.log(k);
+                console.log(item);
+                var line = "<tr>";
+                    line += "<td>" + (k+1) + "</td>";
+                    line += "<td>" + item.fname + "</td>";
+                    line += "<td>" + item.lname + "</td>";
+                    line = "</tr>";
+                $("#tblstudent").append(line);
+            })
+        })
+        .fail((xhr, status, err)=>{
 
+        });
     }
+
+
+
+
+
     $(() => {
-        $("btnjs1").click(loadJS);
+        loadJSON();
     });
+
 </script>
+
 </html>
