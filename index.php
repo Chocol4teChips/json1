@@ -31,7 +31,7 @@
 
     }
     $(() => {
-        $("btnjs1").click(loadJS());
+        $("btnjs1").click(loadJS);
     });
 </script>
 </html>
